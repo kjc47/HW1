@@ -1,10 +1,11 @@
-FROM python:3.12.0a1-buster
-RUN apt-get update &&\ 
-    adduser myuser
-ENV QR_CODE_IMAGE_DIRECTORY='static'
-ENV QR_CODE_DEFAULT_URL='https://github.com/kjc47/HW1'
-ENV QR_CODE_DEFAULT_FILE_NAME='kjc47-github.png'
-WORKDIR /home/myuser
-COPY --chown=myuser:myuser . .
-RUN pip install -r requirements.txt
-ENTRYPOINT ["python","./main.py"]
+# Dockerfile
+FROM python:3.8-slim
+
+WORKDIR /app
+
+COPY requirements.txt requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+CMD ["flask", "run", "--host=0.0.0.0"]

@@ -1,1 +1,2 @@
-qrcode
+Flask==x.x.x
+qrcode[pil]==x.x.x
